@@ -1,3 +1,5 @@
+import TagFunctions from "./TagFunctions";
+
 export default class ItemsToDisplay {
 
     const ITEMS_TO_RETURN = 50;
@@ -15,7 +17,7 @@ export default class ItemsToDisplay {
 
         let rating = 0;
 
-        for (const tag of item.getTags()) {
+        for (const tag of TagFunctions.getTags(item.getTagProbabilities())) {
             const value = tags.get(tag);
             if (value) {
                 rating += value;
@@ -67,11 +69,16 @@ export default class ItemsToDisplay {
         return goodItems;
     }
 
-    static getItemsToDisplay(probabilities, userTags, topicType) {
+    static getAllItems(topicType) {
+        return {new Instance()}
+    }
+
+    // TODO: pagination, add to stack
+    static getItemsToDisplay(userTags, topicType) {
 
         tags = userTags;
 
-        const items = getAllItems(topicType);
+        const items = this.getAllItems(topicType);
         items.sort(this.compareItems());
 
         const toDisplay = this.getGoodItems(items);
