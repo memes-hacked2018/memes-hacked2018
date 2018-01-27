@@ -1,13 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
+import Tabs from "./Tabs.js";
 
 export default class App extends React.Component {
+  
   render() {
     return (
+      
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+
+         <Tabs/>
+
+        <Text>This is where the options go to choose your meme</Text>
       </View>
     );
   }
@@ -16,7 +21,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f9f9f9',
     alignItems: 'center',
     justifyContent: 'center',
   },
