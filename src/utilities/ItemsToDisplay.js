@@ -2,9 +2,10 @@ import TagFunctions from "./TagFunctions";
 
 export default class ItemsToDisplay {
 
-    const ITEMS_TO_RETURN = 50;
+    const ITEMS_TO_RETURN = 50; //
 
     const MINIMUM_GOOD_ITEMS = 20;
+    const ITEM_ZERO_THRESH = 0.1; // if the sum of the tagProbs is less than this it is considered to have no tags
 
     let tags = null;
 
@@ -63,6 +64,21 @@ export default class ItemsToDisplay {
             const rating = this.getRating(item);
             if (rating < goodThreshold && rating > badThreshold) {
                 goodItems.push(item);
+            } else {
+                // less than threshold 
+                // check to see if tagProbs are close to 0
+                
+                const tagProbs = item.getTagProbabilities();
+                const reducer = (accum, current) => accum + current;
+
+                const sum = tagProbs.reduce( reducer);
+                
+                // If an item has a low tagProbs sum then add it
+                // it won't be classified as a tag 
+                if( sum < ITEM_ZERO_THRESH){
+                    goodItems.push( item);
+                }
+
             }
         }
 
@@ -70,7 +86,14 @@ export default class ItemsToDisplay {
     }
 
     static getAllItems(topicType) {
-        return {new Instance()}
+        return { new Instance()}
+    }
+
+    static getExsistingIDs( topicType){
+        // return the IDs of the items currently on the stack
+
+
+
     }
 
     // TODO: pagination, add to stack
@@ -81,25 +104,42 @@ export default class ItemsToDisplay {
         const items = this.getAllItems(topicType);
         items.sort(this.compareItems());
 
-        const toDisplay = this.getGoodItems(items);
+        // get good items to display
+        let toDisplay = this.getGoodItems(items);
 
+        // if the number of good items is less than threshold increase random chance to pick
         let pickRandomChance = 0.05;
         if (goodItems.length < MINIMUM_GOOD_ITEMS) {
             pickRandomChance += (MINIMUM_GOOD_ITEMS - goodItems.length) / (ITEMS_TO_RETURN - goodItems.length);
         }
 
-        if (Math.random() <= pickRandomChance) {
-            const decentItems = this.getDecentItems(items);
+        // get the decent items and pick the ones to include
+        const decentItems = this.getDecentItems(items);
 
-            for (const item of decentItems) {
-                if (Math.random() <= pickRandomChance) {
-                    toDisplay.push(item);
-                }
+        for (const item of decentItems) {
+            if (Math.random() <= pickRandomChance) {
+                toDisplay.push(item);
             }
+        }
+
+        // get existing IDs and take out any items that are duplicates
+        const prevIDs = getExsistingIDs( topicType);
+
+        const filterIDs = (item) => {
+            const curID = item.getID();
+            const isin = prevIDs.includes( curID);
+            return (isin != True); // return the opposite of isin
 
         }
 
+        const result = toDisplay.filter( filterIDs);
+
+
+
         return toDisplay;
     }
+
+
+
 
 }
