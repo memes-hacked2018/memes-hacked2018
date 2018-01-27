@@ -9,4 +9,12 @@ class User {
         this.ratings = ratings;
     }
 
+    /**
+     * Gets all memes to display on the page
+     * @param {integer} pageIndex - the index of the current page
+     */
+    getMemesToDisplay(pageIndex) {
+        
+    }
+
 }
