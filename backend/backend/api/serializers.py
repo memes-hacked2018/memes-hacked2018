@@ -7,8 +7,8 @@ class memesSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'url')
 
 class tagsSerializer(serializers.ModelSerializer):
-    memes = memesSerializer()
+    
     class Meta:
         model = tags
-        fields = ('id', 'name', 'probability', 'memes')
+        fields = ('id', 'name', 'probability', 'memesId')
 

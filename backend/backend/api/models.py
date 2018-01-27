@@ -11,4 +11,4 @@ class tags(models.Model):
 
     name = models.CharField(max_length=255, blank=False)
     probability = models.IntegerField()
-    meme = models.ForeignKey(memes)
+    memesId = models.IntegerField()

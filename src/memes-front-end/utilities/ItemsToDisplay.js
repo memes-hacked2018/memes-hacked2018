@@ -28,9 +28,6 @@ export default class ItemsToDisplay {
 
     static compareItems(left, right) {
 
-        console.error(left);
-        console.error(right);
-
         const leftRating = this.getRating(left);
         const rightRating = this.getRating(right);
 
