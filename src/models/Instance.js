@@ -1,5 +1,11 @@
 class Instance {
 
-    constructor
+    constructor() {
+
+    }
+
+    getTags() {
+        return ["Abc", "Tag 2", "Tag 3"];
+    }
 
 }
