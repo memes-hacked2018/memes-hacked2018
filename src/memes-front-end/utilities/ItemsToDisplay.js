@@ -1,12 +1,11 @@
 import TagFunctions from "./TagFunctions";
+import Instance from "../models/Instance";
+
+const ITEMS_TO_RETURN = 50;
+const MINIMUM_GOOD_ITEMS = 20;
+let tags = null;
 
 export default class ItemsToDisplay {
-
-    const ITEMS_TO_RETURN = 50;
-
-    const MINIMUM_GOOD_ITEMS = 20;
-
-    let tags = null;
 
     /**
      * Gets the rating of the specified item
@@ -28,7 +27,13 @@ export default class ItemsToDisplay {
     }
 
     static compareItems(left, right) {
-        return getRating(left) < getRating(right);
+
+        const leftRating = this.getRating(left);
+        const rightRating = this.getRating(right);
+
+        return leftRating < rightRating;
+
+        //return this.getRating(left) < this.getRating(right);
     }
 
     static getGoodThreshold(items) {
@@ -70,7 +75,7 @@ export default class ItemsToDisplay {
     }
 
     static getAllItems(topicType) {
-        return {new Instance()}
+        return [new Instance()];
     }
 
     // TODO: pagination, add to stack

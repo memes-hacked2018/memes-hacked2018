@@ -1,4 +1,4 @@
-class Instance {
+export default class Instance {
 
     constructor() {
 

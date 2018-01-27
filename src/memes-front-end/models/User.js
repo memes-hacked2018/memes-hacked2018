@@ -1,4 +1,4 @@
-class User {
+export default class User {
 
     /**
      * Constructs a new User object
@@ -6,7 +6,6 @@ class User {
      */
     constructor(name) {
         this.name = name;
-        this.ratings = ratings;
     }
 
     /**
