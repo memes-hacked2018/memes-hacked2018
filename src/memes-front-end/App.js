@@ -1,4 +1,11 @@
 import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import SwipeCards from './SwipeCards.js'
+import { Button, Icon } from 'react-native-elements';
+import { Container } from 'native-base';
+import Tabs from './Tabs.js';
+import ReactionButton from './ReactionButton.js';
+import ButtonLayer from './ButtonLayer'
 import { StyleSheet } from "react-native";
 import { Root, Container, Content, Header, Title, Button, Left, Right, Body, Icon, Footer, FooterTab } from 'native-base';
 import { Font, AppLoading } from "expo";
@@ -110,12 +117,17 @@ export default class App extends React.Component {
           </FooterTab>
         </Footer>
     </Container>
-
     );
   }
 }
 
 const styles = StyleSheet.create({
+  containerStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#f9f9f9',
+    alignItems: 'center',
+    justifyContent: 'center',
   buttonStyle: {
     backgroundColor: "#60B3BB",
   },
