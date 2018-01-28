@@ -1,33 +1,22 @@
+from .models import Meme, Tag
+from .serializers import MemeSerializer, TagSerializer
 from rest_framework import generics
-from .serializers import memesSerializer, tagsSerializer
-from .models import memes, tags
-from rest_framework.response import Response
-
-from rest_framework.views import APIView
-
-# Create your views here.
 
 
-class CreateMemesView(generics.ListCreateAPIView):
-    queryset = memes.objects.all()
-    serializer_class = memesSerializer
-
-    def perform_create(self, serializer):
-        serializer.save()
+class MemeList(generics.ListCreateAPIView):
+    queryset = Meme.objects.all()
+    serializer_class = MemeSerializer
 
 
-class DetailsMemesView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = memes.objects.all()
-    serializer_class = memesSerializer
+class MemeDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Meme.objects.all()
+    serializer_class = MemeSerializer
 
-class CreateTagsView(generics.ListCreateAPIView):
-    queryset = tags.objects.all()
-    serializer_class = tagsSerializer
-
-    def perform_create(self, serializer):
-        serializer.save()
+class TagList(generics.ListCreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
 
 
-class DetailsTagsView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = tags.objects.all()
-    serializer_class = tagsSerializer
+class TagDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
