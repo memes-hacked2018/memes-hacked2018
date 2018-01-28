@@ -1,5 +1,6 @@
 import TagFunctions from "./TagFunctions";
 import Instance from "../models/Instance";
+import fileFunctions from "./fileFunctions";
 
 const ITEMS_TO_RETURN = 50;
 const MINIMUM_GOOD_ITEMS = 20;
@@ -150,6 +151,10 @@ export default class ItemsToDisplay {
         return fileFunctions.readFile(topicType);
     }
 
+    static writeNextIDs( topicType, data){
+        fileFunctions.writeFile( topicType, nextIDs); //overwrite prev IDs with old + new IDs
+    }
+
     // TODO: add to stack
     static getItemsToDisplay(userTags, topicType) {
 
@@ -177,7 +182,8 @@ export default class ItemsToDisplay {
         }
 
         // get existing IDs and take out any items that are duplicates
-        const prevIDs = this.getExistingIDs(topicType);
+        const prevIDs = this.getExistingIDs(topicType); // array of IDs
+
 
         const filterIDs = (item) => {
             const curID = item.getID();
@@ -187,6 +193,15 @@ export default class ItemsToDisplay {
         }
 
         const result = toDisplay.filter(filterIDs);
+
+        const newIDs = result.map( (item) => {
+            return item.getID();
+        })
+
+        const nextIDs = prevIDs.concat( newIDs);
+        this.writeNextIDs( topicType, nextIDs);
+        
+
         return result;
     }
 
