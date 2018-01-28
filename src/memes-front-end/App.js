@@ -1,28 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
 import Tabs from "./Tabs.js";
+import { Container, Header, Title, Button, Left, Right, Body, Icon } from 'native-base';
 
 export default class App extends React.Component {
-  
   render() {
     return (
-      
-      <View style={styles.container}>
-
-         <Tabs/>
-
-        <Text>This is where the options go to choose your meme</Text>
-      </View>
+      <Container>
+      <Header>
+        <Left>
+          <Button transparent>
+            <Icon name='menu' />
+          </Button>
+        </Left>
+        <Body>
+          <Title>Header</Title>
+        </Body>
+        <Right />
+      </Header>
+    </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f9f9f9',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
