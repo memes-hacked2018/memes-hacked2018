@@ -5,9 +5,8 @@ from io import BytesIO
 from numpy import array
 
 client_id = "96fbe8f3e6c8e9f"
-client_secret = "9610a5de8341e22a6f4f8e3d08fad2ea5571bb30"
 
-client = ImgurClient(client_id, client_secret)
+client = ImgurClient(client_id)
 
 lastImage = ""
 
