@@ -14,11 +14,7 @@ export default class App extends React.Component {
             <View style={styles.container}>
                 <Tabs/>
                 <Text>This is where the options go to choose your meme</Text>
-                {
-                    ItemsToDisplay.getItemsToDisplay(new User("a").getRatings(), "Maymay").map((item) => {
-                        return <Text>{item}</Text>;
-                    })
-                }
+
             </View>
         );
     }

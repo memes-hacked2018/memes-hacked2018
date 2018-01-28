@@ -6,6 +6,7 @@ const MINIMUM_GOOD_ITEMS = 20;
 let tags = null;
 const ITEM_ZERO_THRESH = 0.1; // if the sum of the tagProbs is less than this it is considered to have no tags
 
+// TODO: test this stuff
 export default class ItemsToDisplay {
 
     /**
@@ -27,22 +28,67 @@ export default class ItemsToDisplay {
         return rating;
     }
 
+
     static compareItems(left, right) {
 
         const leftRating = this.getRating(left);
         const rightRating = this.getRating(right);
 
-        return leftRating < rightRating;
+        if (leftRating < rightRating) {
+            return -1;
+        } else if (leftRating > rightRating) {
+            return 1;
+        }
 
-        //return this.getRating(left) < this.getRating(right);
+        return 0;
+    }
+
+    static standardDeviation(numbers) {
+
+        let total = 0;
+        for (const key of numbers) {
+            total += key;
+        }
+
+        const mean = total / numbers.length;
+
+        let sd = 0;
+
+        for (const key of numbers) {
+            sd += Math.pow(key - mean, 2);
+        }
+        
+        return Math.sqrt(sd/numbers.length);
     }
 
     static getGoodThreshold(items) {
-        return 0.5;
+        const values = items.map((item) => ItemsToDisplay.getRating(item));
+        let mean = 0;
+
+        for (const value of values) {
+            mean += value;
+        }
+
+        if (values.length != 0) {
+            mean /= values.length;
+        }
+
+        return mean + (this.standardDeviation(values) / 2);
     }
 
     static getBadThreshold(items) {
-        return 0.2;
+        const values = items.map((item) => ItemsToDisplay.getRating(item));
+        let mean = 0;
+
+        for (const value of values) {
+            mean += value;
+        }
+
+        if (values.length != 0) {
+            mean /= values.length;
+        }
+
+        return mean - (this.standardDeviation(values) / 2);
     }
 
     static getGoodItems(items) {
@@ -90,16 +136,25 @@ export default class ItemsToDisplay {
         return goodItems;
     }
 
+    // TODO: get all items from database
     static getAllItems(topicType) {
         return [new Instance()];
     }
 
-    static getExsistingIDs( topicType){
-        // return the IDs of the items currently on the stack
+    /**
+     * Gets all existing items that the user has seen
+     * @param {String} topicType - the topic's unique type
+     * @return the unique IDs of all existing items the user has seen
+     */
+    static getExistingIDs(topicType){
+        const seen = [];
 
+        // TODO: read from file
+
+        return seen;
     }
 
-    // TODO: pagination, add to stack
+    // TODO: add to stack
     static getItemsToDisplay(userTags, topicType) {
 
         tags = userTags;
@@ -126,7 +181,7 @@ export default class ItemsToDisplay {
         }
 
         // get existing IDs and take out any items that are duplicates
-        const prevIDs = getExsistingIDs( topicType);
+        const prevIDs = this.getExistingIDs(topicType);
 
         const filterIDs = (item) => {
             const curID = item.getID();
@@ -136,13 +191,7 @@ export default class ItemsToDisplay {
         }
 
         const result = toDisplay.filter( filterIDs);
-
-
-
-        return toDisplay;
+        return result;
     }
-
-
-
 
 }
