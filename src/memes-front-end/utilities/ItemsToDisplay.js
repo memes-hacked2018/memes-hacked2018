@@ -146,12 +146,8 @@ export default class ItemsToDisplay {
      * @param {String} topicType - the topic's unique type
      * @return the unique IDs of all existing items the user has seen
      */
-    static getExistingIDs(topicType){
-        const seen = [];
-
-        // TODO: read from file
-
-        return seen;
+    static getExistingIDs(topicType) {
+        return fileFunctions.readFile(topicType);
     }
 
     // TODO: add to stack
@@ -185,12 +181,12 @@ export default class ItemsToDisplay {
 
         const filterIDs = (item) => {
             const curID = item.getID();
-            const isin = prevIDs.includes( curID);
+            const isin = prevIDs.includes(curID);
             return (isin != True); // return the opposite of isin
 
         }
 
-        const result = toDisplay.filter( filterIDs);
+        const result = toDisplay.filter(filterIDs);
         return result;
     }
 
