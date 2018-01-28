@@ -1,17 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import SwipeCards from './SwipeCards.js'
-import { Button, Icon } from 'react-native-elements';
-import { Container } from 'native-base';
-import Tabs from './Tabs.js';
-import ReactionButton from './ReactionButton.js';
-import ButtonLayer from './ButtonLayer'
-import { StyleSheet } from "react-native";
+import ButtonLayer from './ButtonLayer.js'
 import { Root, Container, Content, Header, Title, Button, Left, Right, Body, Icon, Footer, FooterTab } from 'native-base';
 import { Font, AppLoading } from "expo";
-import { StackNavigator, DrawerNavigator } from "react-navigation";
-// import Tabs from "./Tabs.js";
-
 import CreatePage from "./TabPages/CreatePage.js";
 import ProfilePage from "./TabPages/ProfilePage.js";
 import TagsPage from "./TabPages/TagsPage.js";
@@ -127,7 +119,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#f9f9f9',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
+  },
   buttonStyle: {
     backgroundColor: "#60B3BB",
   },
