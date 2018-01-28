@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import SwipeCards from './SwipeCards.js'
 import ButtonLayer from './ButtonLayer.js'
 import { Root, Container, Content, Header, Title, Button, Left, Right, Body, Icon, Footer, FooterTab } from 'native-base';
 import { Font, AppLoading } from "expo";
@@ -48,7 +47,6 @@ export default class App extends React.Component {
   }
 
   renderSelectedTab () {
-    console.log(this.state.selectedTab);
     switch (this.state.selectedTab) {
       case 'create':
         return (<CreatePage />);

@@ -53,15 +53,12 @@ export default class App extends React.Component {
   }
 
   handleYup (card) {
-    console.log("yup")
   }
 
   handleNope (card) {
-    console.log("nope")
   }
 
   cardRemoved (index) {
-    console.log(`The index is ${index}`);
   }
 
   render() {
@@ -73,8 +70,8 @@ export default class App extends React.Component {
           loop={true}
           renderCard={(cardData) => <Card {...cardData} />}
           renderNoMoreCards={() => <NoMoreCards />}
-          showYup={true}
-          showNope={true}
+          showYup={false}
+          showNope={false}
           handleYup={this.handleYup}
           handleNope={this.handleNope}
           cardRemoved={this.cardRemoved.bind(this)}
