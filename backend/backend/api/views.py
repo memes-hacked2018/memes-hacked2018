@@ -6,20 +6,8 @@ from django.http import JsonResponse
 
 import json
 
-class Meme_Obj(object):
-    url = ""
-    ids = ""
-    tags = ""
-
-    # The class "constructor" - It's actually an initializer 
-    def __init__(self, url, ids, tags):
-        self.url = url
-        self.ids = ids
-        self.tags = tags
-
-def make_meme(url, ids, tags):
-    meme = Meme_Obj(url, ids, tags)
-    return meme
+def add_meme():
+    return
 
 def js(topic="meme"):
     meme_ids = list(Meme.objects.all().values_list('id', flat=True))
