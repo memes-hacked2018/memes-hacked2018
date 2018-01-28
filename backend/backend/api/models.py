@@ -2,13 +2,13 @@ from django.db import models
 
 # Create your models here.
 
-class memes(models.Model):
+class Meme(models.Model):
     name = models.CharField(max_length=255, blank=False)
     url = models.CharField(max_length=255, blank=False)
 
 
-class tags(models.Model):
+class Tag(models.Model):
 
     name = models.CharField(max_length=255, blank=False)
     probability = models.IntegerField()
-    memesId = models.IntegerField()
+    meme = models.ForeignKey(Meme, related_name='tags', on_delete=models.CASCADE)
