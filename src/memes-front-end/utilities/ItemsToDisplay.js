@@ -7,7 +7,18 @@ const MINIMUM_GOOD_ITEMS = 20;
 let tags = null;
 const ITEM_ZERO_THRESH = 0.1; // if the sum of the tagProbs is less than this it is considered to have no tags
 
-// TODO: test this stuff
+
+/* TODO
+    test this stuff
+    handle when there is a tag that the user does not have a rating for
+    add the return array to the stack of the memes
+    write the function that makes the API call and handle its request 
+
+*/
+
+
+
+
 export default class ItemsToDisplay {
 
     /**
@@ -17,16 +28,24 @@ export default class ItemsToDisplay {
      */
     static getRating(item) {
 
+        /*
         let rating = 0;
-
+        
         for (const tag of TagFunctions.getTags(item.getTagProbabilities())) {
             const value = tags.get(tag);
             if (value) {
                 rating += value;
             }
         }
-
+        
         return rating;
+        */
+
+        const ITPdict = item.getTagProbabilities(); // TODO make this function (Item Tag probability)
+        const UTSdict = getUserTagScores();         // TODO make this funciton (User Tag scores)
+
+        return compareDicts( ITPdict, UTS);
+
     }
 
 
@@ -137,9 +156,52 @@ export default class ItemsToDisplay {
         return goodItems;
     }
 
+    static compareDicts( d1, d2){
+        // d1 item tag probs  ITP
+        // d2 user tag scores UTS
+        let rating = 0;
+
+        for( let key in d1){
+            // loop through the dictionary of ITP
+
+            // TODO any keys that don't show up in the UTS need to be added and
+            // set to the starting value
+            if( !( key in d2)){
+                // tag is not in UTS
+                // TODO add it
+            }
+
+            rating += d1[key] * d2[key];
+
+        }
+        
+        return rating;
+
+    }
+
     // TODO: get all items from database
+    // Probs need to change up how the tags:probabilities work
     static getAllItems(topicType) {
         return [new Instance()];
+
+        /* receive json with structure
+        
+        items{
+            1 {
+                id
+                url
+                dict{
+                    tagID:prob
+                }
+            }
+            2{
+                
+            }
+        }
+        */ 
+
+    
+
     }
 
     /**
@@ -200,9 +262,9 @@ export default class ItemsToDisplay {
 
         const nextIDs = prevIDs.concat( newIDs);
         this.writeNextIDs( topicType, nextIDs);
-        
 
-        return result;
+
+        return result; // TODO put this array on the stack of items for the user to see
     }
 
 }
