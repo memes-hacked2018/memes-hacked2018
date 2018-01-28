@@ -1,24 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import SwipeCards from './SwipeCards.js'
-import { Button } from 'react-native-elements';
-import Tabs from "./Tabs.js";
+import { Button, Icon } from 'react-native-elements';
+import { Container } from 'native-base';
+import Tabs from './Tabs.js';
+import ReactionButton from './ReactionButton.js';
+import ButtonLayer from './ButtonLayer'
 
 export default class App extends React.Component {
   
   render() {
     return (
-      <View style={styles.container}>
+      <Container style={styles.containerStyle}>
+        <SwipeCards/>
         <Tabs/>
-        <Text>This is where the options go to choose your meme</Text>
-      </View>
+        <ButtonLayer/>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerStyle: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#f9f9f9',
     alignItems: 'center',
     justifyContent: 'center',
