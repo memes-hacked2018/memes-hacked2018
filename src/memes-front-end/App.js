@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from "react-native";
 import { Root, Container, Content, Header, Title, Button, Left, Right, Body, Icon, Footer, FooterTab } from 'native-base';
 import { Font, AppLoading } from "expo";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
@@ -7,6 +8,7 @@ import { StackNavigator, DrawerNavigator } from "react-navigation";
 import CreatePage from "./TabPages/CreatePage.js";
 import ProfilePage from "./TabPages/ProfilePage.js";
 import TagsPage from "./TabPages/TagsPage.js";
+import TinderPage from "./TabPages/TinderPage.js";
 
 // const ScreenNavigator = StackNavigator({
 //   Create: {
@@ -33,7 +35,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      selectedTab: "default",
+      selectedTab: "tinder",
       loading: true 
     };
   }
@@ -47,6 +49,7 @@ export default class App extends React.Component {
   }
 
   renderSelectedTab () {
+    console.log(this.state.selectedTab);
     switch (this.state.selectedTab) {
       case 'create':
         return (<CreatePage />);
@@ -56,6 +59,9 @@ export default class App extends React.Component {
         break;
       case 'tags':
         return (<TagsPage />);
+        break;
+      case 'tinder':
+        return (<TinderPage/>);
         break;
       default:
     }
@@ -71,7 +77,7 @@ export default class App extends React.Component {
     }
     return (
       <Container>
-      <Header>
+      <Header style={styles.buttonStyle}>
         <Body>
           <Title>Memes4Life</Title>
         </Body>
@@ -79,23 +85,40 @@ export default class App extends React.Component {
       <Content>
         {this.renderSelectedTab()}
       </Content>
-      <Footer>
+      <Footer >
           <FooterTab>
-              <Button active={this.state.selectedTab==='create'} 
-               onPress={() => this.setState({selectedTab: 'create'})}>
-                  <Icon name="create" />
-              </Button>
-              <Button active={this.state.selectedTab==='profile'} 
-               onPress={() => this.setState({selectedTab: 'profile'})}>
-                  <Icon name="person" />
-              </Button>
-              <Button active={this.state.selectedTab==='tags'} 
-               onPress={() => this.setState({selectedTab: 'tags'})}>
-                  <Icon name="md-pricetags" />
-              </Button>
+            <Button active={this.state.selectedTab==='tinder'} 
+              onPress={() => this.setState({selectedTab: 'tinder'})}
+              style={styles.buttonStyle}>
+                <Icon name="ios-flame" style={styles.iconStyle} />
+            </Button>
+            <Button active={this.state.selectedTab==='create'} 
+              onPress={() => this.setState({selectedTab: 'create'})}
+              style={styles.buttonStyle}>
+                <Icon name="create" style={styles.iconStyle}/>
+            </Button>
+            <Button active={this.state.selectedTab==='profile'} 
+              onPress={() => this.setState({selectedTab: 'profile'})}
+              style={styles.buttonStyle}>
+                <Icon name="person" style={styles.iconStyle}/>
+            </Button>
+            <Button active={this.state.selectedTab==='tags'} 
+              onPress={() => this.setState({selectedTab: 'tags'})}
+              style={styles.buttonStyle}>
+                <Icon name="md-pricetags" style={styles.iconStyle} />
+            </Button>
           </FooterTab>
         </Footer>
     </Container>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    backgroundColor: "#60B3BB",
+  },
+  iconStyle: {
+    color: "#000000"
+  }
+})
